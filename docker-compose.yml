@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  service-b-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app  
+      - /app/node_modules
+    ports:
+      - "3002:3002"
+    environment:
+      - DATABASE_URL=postgres://postgres:password@service-b-db:5432/service_a
+      - RABBITMQ_URL=amqp://rabbitmq
+
+  service-b-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3002:3002"
+    environment:
+      - DATABASE_URL=postgres://postgres:password@service-b-db:5432/service_a
+      - RABBITMQ_URL=amqp://rabbitmq
+
+networks:
+  default:
+    external:
+      name: microservices_network
