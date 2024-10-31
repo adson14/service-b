@@ -15,7 +15,7 @@ export class MensgaemController {
       this.logger.log(`Message received: ${data.text}`);
       this.logger.log(`Token valid for user: ${decodedToken.userId}`);
     } catch (error) {
-      this.logger.error('Invalid token');
+      this.logger.error('Invalid token!');
     }
   }
 }
