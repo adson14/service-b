@@ -1,6 +1,6 @@
 import { Controller, Logger } from '@nestjs/common';
 import { MessagePattern, Payload,Ctx,RmqContext } from '@nestjs/microservices';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from 'src/auth.service';
 
 @Controller()
 export class MensgaemController {

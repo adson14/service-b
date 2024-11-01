@@ -10,7 +10,6 @@ services:
     ports:
       - "3002:3002"
     environment:
-      - DATABASE_URL=postgres://postgres:password@service-b-db:5432/service_a
       - RABBITMQ_URL=amqp://rabbitmq
     depends_on:
       - service-b-db
@@ -22,7 +21,6 @@ services:
     ports:
       - "3002:3002"
     environment:
-      - DATABASE_URL=postgres://postgres:password@service-b-db:5432/service_a
       - RABBITMQ_URL=amqp://rabbitmq
     depends_on:
       - service-b-db
