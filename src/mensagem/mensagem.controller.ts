@@ -14,8 +14,11 @@ export class MensgaemController {
       const decodedToken = await this.authService.verifyToken(data.token);
       this.logger.log(`Message received: ${data.text}`);
       this.logger.log(`Token valid for user: ${decodedToken.userId}`);
+      return { success: true, message: 'Message processed by Service B' }; // Garante que uma resposta seja retornada
     } catch (error) {
       this.logger.error('Invalid token!');
+      return { success: false, message: 'Invalid token' }; // Garante que uma resposta seja retornada
+
     }
   }
 }
