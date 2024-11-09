@@ -18,8 +18,9 @@ import { AmqplibInstrumentation } from '@opentelemetry/instrumentation-amqplib';
     [SemanticResourceAttributes.SERVICE_NAME]: process.env.OTEL_SERVICE_NAME,
     [SemanticResourceAttributes.SERVICE_NAMESPACE]: 'minha-aplicacao',
     [SemanticResourceAttributes.SERVICE_INSTANCE_ID]: process.env.HOSTNAME || 'instance-2',  // ID da instância
-    [SemanticResourceAttributes.SERVICE_VERSION]: '1.0.0',
-    [SemanticResourceAttributes.DEPLOYMENT_ENVIRONMENT]: 'development',  // ou 'staging', 'development'
+    [SemanticResourceAttributes.SERVICE_VERSION]: process.env.VERSION,
+    [SemanticResourceAttributes.DEPLOYMENT_ENVIRONMENT]: process.env.ENVIRONMENT,  // ou 'staging', 'development'
+    [SemanticResourceAttributes.HOST_NAME]: process.env.DD_HOSTNAME || process.env.HOSTNAME 
   }),
   instrumentations: [
     //new HttpInstrumentation(),
@@ -32,7 +33,6 @@ import { AmqplibInstrumentation } from '@opentelemetry/instrumentation-amqplib';
 
 sdk.start();
 
-
 process.on("SIGTERM", () => {
   sdk
     .shutdown()
@@ -40,5 +40,6 @@ process.on("SIGTERM", () => {
     .catch((error) => console.log("Error terminating tracing", error))
     .finally(() => process.exit(0));
 });
+
 
 export default sdk;
